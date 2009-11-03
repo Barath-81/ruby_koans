@@ -43,10 +43,11 @@ class AboutHashes < EdgeCase::Koan
     assert_equal hash1, hash2    
   end
 
+  require 'set'
   def test_hash_keys_and_values
     hash = { :one => "uno", :two => "dos" }
-    assert_equal [:one, :two], hash.keys
-    assert_equal ["uno", "dos"], hash.values
+    assert_equal [:one, :two].to_set, hash.keys.to_set
+    assert_equal ["uno", "dos"].to_set, hash.values.to_set
   end
 
   def test_combining_hashes
