@@ -14,6 +14,12 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
+  # each value must be greater than 0
+  raise TriangleError if [a, b, c].find {|x| x<=0}
+  # sum of all sides minus the max side must be less than max
+  sum = [a,b,c].inject() {|s,x| s+x}
+  max = [a,b,c].max
+  raise TriangleError if (sum-max <= max)
   case [a,b,c].uniq.size
   when 1 then :equilateral
   when 2 then :isosceles
