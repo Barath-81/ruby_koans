@@ -14,7 +14,25 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+
+  # possible solution
+  #case [a,b,c].uniq.size
+  #when 1 then :equilateral
+  #when 2 then :isosceles
+  #else :scalene
+  #end
+
+  raise TriangleError if ([a,b,c].find {|x| x <= 0 })
+  raise TriangleError unless ((a + b + c) - (2 * [a,b,c].max)) > 0
+
+  if a == b && b == c
+    :equilateral
+  elsif a == b || b == c || a == c
+    :isosceles
+  else
+    :scalene
+  end
+
 end
 
 # Error class used in part 2.  No need to change this code.
