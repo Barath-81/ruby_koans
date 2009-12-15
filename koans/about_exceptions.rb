@@ -20,7 +20,7 @@ class AboutExceptions < EdgeCase::Koan
       result = :exception_handled
     end
 
-    assert_equal __, result
+    assert_equal :exception_handled, result
 
     assert ex.is_a?(StandardError), "Failure message."
     assert ex.is_a?(RuntimeError), "Failure message."
@@ -28,7 +28,7 @@ class AboutExceptions < EdgeCase::Koan
     assert RuntimeError.ancestors.include?(StandardError),
       "RuntimeError is a subclass of StandardError"
     
-    assert_equal __, ex.message
+    assert_equal "Oops", ex.message
   end
 
   def test_raising_a_particular_error
@@ -39,9 +39,9 @@ class AboutExceptions < EdgeCase::Koan
     rescue MySpecialError => ex
       result = :exception_handled
     end
-
-    assert_equal __(:exception_handled), result
-    assert_equal __, ex.message
+    #puts ex.backtrace
+    assert_equal MySpecialError, ex.class
+    assert_equal "My Message", ex.message
   end
 
   def test_ensure_clause
@@ -49,12 +49,12 @@ class AboutExceptions < EdgeCase::Koan
     begin
       fail "Oops"
     rescue StandardError => ex
-      # no code here
+      # no code
     ensure
       result = :always_run
     end
 
-    assert_equal __, result
+    assert_equal :always_run, result
   end
 
 end
